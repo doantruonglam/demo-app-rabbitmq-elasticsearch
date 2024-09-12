@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import {
   useDeleteStudentMutation,
-  useGetAllStudentsQuery,
+  useGetAllElasticStudentsQuery,
 } from "./studentsApiSlice"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
@@ -14,7 +14,7 @@ export const Student = () => {
     isLoading,
     error,
     refetch,
-  } = useGetAllStudentsQuery(pagination)
+  } = useGetAllElasticStudentsQuery(pagination)
   const [deleteStudent] = useDeleteStudentMutation()
 
   useEffect(() => {

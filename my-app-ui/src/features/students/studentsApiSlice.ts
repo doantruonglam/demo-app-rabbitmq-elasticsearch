@@ -33,6 +33,13 @@ export const studentApiSlice = createApi({
                 body: paging,
             })
         }),
+        getAllElasticStudents: builder.query<StudentResponse, Pagination>({
+            query: (paging) => ({
+                url: '/Student/GetElasticAll',
+                method: 'POST',
+                body: paging,
+            })
+        }),
         getStudentById: builder.query<Student, number>({
             query: (id) => `/Student/Get?studentID=${id}`,
         }),
@@ -52,7 +59,7 @@ export const studentApiSlice = createApi({
         }),
         deleteStudent: builder.mutation<void, number>({
             query: (id) => ({
-                url: `/Student/Delete/${id}`,
+                url: `/Student/Delete?studentID=${id}`,
                 method: 'DELETE',
             }),
         }),
@@ -64,6 +71,7 @@ export const studentApiSlice = createApi({
 // Same as `quotesApiSlice.endpoints.getQuotes.useQuery`
 export const {
     useGetAllStudentsQuery,
+    useGetAllElasticStudentsQuery,
     useGetStudentByIdQuery,
     useAddStudentMutation,
     useUpdateStudentMutation,

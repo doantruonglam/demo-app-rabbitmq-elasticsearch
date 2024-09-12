@@ -52,7 +52,7 @@ namespace my_app.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(int studentID)
+        public async Task<IActionResult> Delete([FromRoute] int studentID)
         {
 
             var result = await _studentService.DeleteAsync(studentID);

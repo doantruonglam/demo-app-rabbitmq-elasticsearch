@@ -11,7 +11,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 var settings = new ConnectionSettings(new Uri("http://host.docker.internal:9200"))
         .DefaultIndex("students");
@@ -35,12 +44,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .SetIsOriginAllowed((host) => true)
-            );
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
