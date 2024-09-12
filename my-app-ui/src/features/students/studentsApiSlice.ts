@@ -1,20 +1,20 @@
 // Need to use the React-specific entry point to import `createApi`
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_BASE_URL, STUDENT_API_ENDPOINT } from "../../utils/shared/const";
 
 interface Student {
-    id: number;
+    id?: number;
     name: string;
     dob: string;
     address: string;
     class: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 interface StudentResponse {
     students: Student[];
-    totalCount: number;
+    totalStudent: number;
 }
 
 interface Pagination {

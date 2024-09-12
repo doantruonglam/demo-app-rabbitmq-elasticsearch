@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react"
-import { useDeleteStudentMutation, useGetAllStudentsQuery } from "./studentsApiSlice"
-import { Link, useLocation } from "react-router-dom"
+import {
+  useDeleteStudentMutation,
+  useGetAllStudentsQuery,
+} from "./studentsApiSlice"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export const Student = () => {
   const [pagination, setPagination] = useState({ pageNum: 1, pageSize: 10 })
   const location = useLocation()
+  const navigate = useNavigate()
   const {
     data: students,
     isLoading,
     error,
-    refetch
+    refetch,
   } = useGetAllStudentsQuery(pagination)
   const [deleteStudent] = useDeleteStudentMutation()
-    
+
   useEffect(() => {
     // Check if the location state contains the refetch flag
     if (location.state && location.state.refetch) {
-      refetch() // Refetch data if coming from CreateStudent with refetch state
-      // Clear the state after refetch to avoid repeated refetching
-      // You can use a simple timeout or reset the location state
-      setTimeout(() => {
-        // Resetting the state to avoid repeated refetching
-        history.replace(location.pathname)
-      }, 0)
+      refetch()
+      navigate(location.pathname, { replace: true })
     }
-  }, [location.state, refetch])
+  }, [location.state, refetch, navigate])
 
-  const handleDelete = async (id: number) => {
-    await deleteStudent(id)
+  const handleDelete = async (id?: number) => {
+    if (id != null) await deleteStudent(id)
   }
-    
+
   const handleNextPage = () => {
     setPagination(prev => ({ ...prev, pageNum: prev.pageNum + 1 }))
   }
@@ -49,7 +48,8 @@ export const Student = () => {
       </Link>
 
       <span>
-        Viewing {students?.students.length} of {students?.totalStudent} students.
+        Viewing {students?.students.length} of {students?.totalStudent}{" "}
+        students.
       </span>
       <table>
         <thead>
