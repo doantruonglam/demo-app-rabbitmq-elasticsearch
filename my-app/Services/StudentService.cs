@@ -59,6 +59,7 @@ namespace my_app.Services
 
             _context.Students.Remove(std);
             await _context.SaveChangesAsync();
+            await _senderService.PutNotification(std, "delete");
 
             return HttpStatusCode.OK;
         }
@@ -131,6 +132,7 @@ namespace my_app.Services
 
             _context.Students.Update(std);
             await _context.SaveChangesAsync();
+            await _senderService.PutNotification(std, "update");
 
             return std;
         }

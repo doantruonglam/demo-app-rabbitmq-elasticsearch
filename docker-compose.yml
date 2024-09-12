@@ -4,19 +4,28 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-  
+
   elasticsearch:
     image: elasticsearch:7.10.1
     environment:
       - discovery.type=single-node
     ports:
       - "9200:9200"
-
-  webapi:
+  my-app:
     build:
-      context: .
+      context: ./my-app
       dockerfile: Dockerfile
     ports:
       - "5000:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - rabbitmq
+      - elasticsearch
+
+  my-app-ui:
+    build:
+      context: ./my-app-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"

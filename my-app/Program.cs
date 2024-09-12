@@ -11,8 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
-var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
+var settings = new ConnectionSettings(new Uri("http://host.docker.internal:9200"))
         .DefaultIndex("students");
 var client = new ElasticClient(settings);
 builder.Services.AddSingleton<IElasticClient>(client);
@@ -34,7 +35,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173"));
+app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+            );
 
 app.MapControllers();
 

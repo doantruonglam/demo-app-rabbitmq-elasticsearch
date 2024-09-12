@@ -27,9 +27,4 @@ namespace my_app.Models
         public int PageSize { get; set; }
     }
 
-    public class StudentConsumer : Student
-    {
-        public string Action { get; set; }
-    }
-
 }
