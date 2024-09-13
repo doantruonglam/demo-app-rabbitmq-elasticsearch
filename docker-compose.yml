@@ -11,9 +11,10 @@ services:
       - discovery.type=single-node
     ports:
       - "9200:9200"
-  my-app:
+
+  student-managerment-api:
     build:
-      context: ./my-app
+      context: ./student-managerment-api
       dockerfile: Dockerfile
     ports:
       - "5000:80"
@@ -23,9 +24,17 @@ services:
       - rabbitmq
       - elasticsearch
 
-  my-app-ui:
+  student-managerment-ui:
     build:
-      context: ./my-app-ui
+      context: ./student-managerment-ui
       dockerfile: Dockerfile
     ports:
       - "3000:80"
+
+  rabbitmq-consumer:
+    build:
+      context: ./comsumer-rabbitmq
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - elasticsearch

@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { useAddStudentMutation } from "../studentsApiSlice";
+import { useAddStudentMutation } from "../studentsApiSlice"
 import { useNavigate } from "react-router-dom"
+import styles from "./create.module.css"
 
 export const CreateStudent = () => {
   const [name, setName] = useState("")
@@ -17,7 +18,7 @@ export const CreateStudent = () => {
   }
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <h1>Create Student</h1>
       <form onSubmit={handleSubmit}>
         <input

@@ -4,6 +4,7 @@ import {
   useGetAllElasticStudentsQuery,
 } from "./studentsApiSlice"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import styles from "./students.module.css"
 
 export const Student = () => {
   const [pagination, setPagination] = useState({ pageNum: 1, pageSize: 10 })
@@ -18,7 +19,6 @@ export const Student = () => {
   const [deleteStudent] = useDeleteStudentMutation()
 
   useEffect(() => {
-    // Check if the location state contains the refetch flag
     if (location.state && location.state.refetch) {
       refetch()
       navigate(location.pathname, { replace: true })
@@ -41,17 +41,18 @@ export const Student = () => {
   if (error) return <div>Error: {JSON.stringify(error)}</div>
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Students List</h1>
       <Link to="/create">
-        <button>Create Student</button>
+        <button className={`${styles.button} ${styles.buttonCreate}`}>
+          Create Student
+        </button>
       </Link>
-
       <span>
         Viewing {students?.students.length} of {students?.totalStudent}{" "}
         students.
       </span>
-      <table>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>ID</th>
@@ -72,24 +73,33 @@ export const Student = () => {
               <td>{student.class}</td>
               <td>
                 <Link to={`/update/${student.id}`}>
-                  <button>Update</button>
+                  <button className={`${styles.button} ${styles.buttonUpdate}`}>
+                    Update
+                  </button>
                 </Link>
-                <button onClick={() => handleDelete(student.id)}>Delete</button>
+                <button
+                  className={`${styles.button} ${styles.buttonDelete}`}
+                  onClick={() => handleDelete(student.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div>
+      <div className={styles.pagination}>
         <button
           onClick={handlePreviousPage}
           disabled={pagination.pageNum === 1}
+          className={`${styles.button} ${styles.buttonUpdate}`}
         >
           Previous
         </button>
         <button
           onClick={handleNextPage}
           disabled={students?.students.length === 0}
+          className={`${styles.button} ${styles.buttonUpdate}`}
         >
           Next
         </button>
