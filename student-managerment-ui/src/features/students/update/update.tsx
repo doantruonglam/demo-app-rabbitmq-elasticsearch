@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
-import { useGetStudentByIdQuery, useUpdateStudentMutation } from "../studentsApiSlice";
+import {
+  useGetStudentByIdQuery,
+  useUpdateStudentMutation,
+} from "../studentsApiSlice"
 import { useNavigate, useParams } from "react-router-dom"
+import styles from "./update.module.css"
 
 export const UpdateStudent = () => {
   const { id } = useParams<{ id: string }>()
@@ -29,11 +33,11 @@ export const UpdateStudent = () => {
       navigate("/", { state: { refetch: true } })
     }
   }
-    
+
   if (isLoading) return <div>Loading...</div>
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <h1>Update Student</h1>
       <form onSubmit={handleSubmit}>
         <input

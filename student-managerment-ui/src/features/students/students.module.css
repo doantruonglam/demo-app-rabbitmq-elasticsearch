@@ -1,0 +1,93 @@
+/* student.module.css */
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonCreate {
+  background-color: #28a745; /* Green for create */
+  color: white;
+}
+
+.buttonCreate:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.buttonUpdate {
+  background-color: #007bff; /* Blue for update */
+  color: white;
+}
+
+.buttonUpdate:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.buttonDelete {
+  background-color: #dc3545; /* Red for delete */
+  color: white;
+}
+
+.buttonDelete:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+span {
+  display: block;
+  text-align: center;
+  margin: 20px 0; /* Space above and below */
+  color: #555; /* Grey text */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
