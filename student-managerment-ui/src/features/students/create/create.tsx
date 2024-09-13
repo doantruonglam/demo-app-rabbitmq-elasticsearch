@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAddStudentMutation } from "../studentsApiSlice"
 import { useNavigate } from "react-router-dom"
-import styles from "./create.module.css"
+import styles from "../students.module.css"
 
 export const CreateStudent = () => {
   const [name, setName] = useState("")
@@ -49,8 +49,12 @@ export const CreateStudent = () => {
           onChange={e => setClassName(e.target.value)}
           required
         />
-        <button type="submit">Add Student</button>
-        <button onClick={() => navigate("/")}>Cancel</button>
+        <button className={styles.buttonUpdate} type="submit">
+          Add Student
+        </button>
+        <button className={styles.buttonDelete} onClick={() => navigate("/")}>
+          Cancel
+        </button>
       </form>
     </div>
   )
