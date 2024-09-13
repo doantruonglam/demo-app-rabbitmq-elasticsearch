@@ -20,7 +20,7 @@ public class Worker : BackgroundService
 
         var factory = new ConnectionFactory()
         {
-            HostName = "localhost",
+            HostName = "host.docker.internal",
             Port = 5672,
             UserName = "guest",
             Password = "guest",
@@ -32,7 +32,7 @@ public class Worker : BackgroundService
         _channel.QueueDeclare(queue: "update", durable: false, exclusive: false, autoDelete: false, arguments: null);
         _channel.QueueDeclare(queue: "delete", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-        var elasticsearchSettings = new ConnectionSettings(new Uri("localhost:9200")).DefaultIndex("students");
+        var elasticsearchSettings = new ConnectionSettings(new Uri("http://host.docker.internal:9200")).DefaultIndex("students");
         _elasticClient = new ElasticClient(elasticsearchSettings);
     }
 

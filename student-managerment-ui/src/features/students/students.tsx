@@ -48,10 +48,6 @@ export const Student = () => {
           Create Student
         </button>
       </Link>
-      <span>
-        Viewing {students?.students.length} of {students?.totalStudent}{" "}
-        students.
-      </span>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -92,17 +88,28 @@ export const Student = () => {
         <button
           onClick={handlePreviousPage}
           disabled={pagination.pageNum === 1}
-          className={`${styles.button} ${styles.buttonUpdate}`}
+          className={`${styles.button} ${styles.buttonUpdate} ${styles.m10}`}
         >
           Previous
         </button>
         <button
           onClick={handleNextPage}
-          disabled={students?.students.length === 0}
-          className={`${styles.button} ${styles.buttonUpdate}`}
+          disabled={
+            students?.students.length +
+              (pagination.pageNum - 1) * pagination.pageSize >=
+            students?.totalStudent
+          }
+          className={`${styles.button} ${styles.buttonUpdate} ${styles.m10}`}
         >
           Next
         </button>
+
+        <span>
+          Viewing{" "}
+          {students?.students.length +
+            (pagination.pageNum - 1) * pagination.pageSize}{" "}
+          of {students?.totalStudent} students.
+        </span>
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import {
   useUpdateStudentMutation,
 } from "../studentsApiSlice"
 import { useNavigate, useParams } from "react-router-dom"
-import styles from "./update.module.css"
+import styles from "../students.module.css"
 
 export const UpdateStudent = () => {
   const { id } = useParams<{ id: string }>()
@@ -68,8 +68,12 @@ export const UpdateStudent = () => {
           onChange={e => setClassName(e.target.value)}
           required
         />
-        <button type="submit">Update Student</button>
-        <button onClick={() => navigate("/")}>Cancel</button>
+        <button className={styles.buttonUpdate} type="submit">
+          Update Student
+        </button>
+        <button className={styles.buttonDelete} onClick={() => navigate("/")}>
+          Cancel
+        </button>
       </form>
     </div>
   )
